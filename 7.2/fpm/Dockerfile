@@ -5,7 +5,6 @@ RUN apt-get update
 RUN apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libmcrypt-dev \
         libpng-dev \
         libxml2-dev \
         libicu-dev \
@@ -18,7 +17,7 @@ RUN apt-get install -y \
 RUN apt-get clean
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) opcache pdo pdo_mysql iconv mcrypt soap zip intl gd
+    && docker-php-ext-install -j$(nproc) opcache pdo pdo_mysql iconv soap zip intl gd
 
 RUN pecl install memcached \
     && echo "extension=memcached.so" >> /usr/local/etc/php/conf.d/memcached.ini
